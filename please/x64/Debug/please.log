@@ -1,0 +1,6 @@
+﻿  Source.cpp
+C:\Users\Ry-Bread\source\repos\please\please\Source.cpp(37,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Ry-Bread\source\repos\please\please\Source.cpp(41,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  user.cpp
+  Generating Code...
+  please.vcxproj -> C:\Users\Ry-Bread\source\repos\please\x64\Debug\please.exe
