@@ -4,10 +4,17 @@
 
 class App {
 public:
+	App();
+	App(User&);
+	~App();
 	void storePerson();
 	void storeTranscation();
 	void printDefault();
 	void printAllTranscations();
+	void waitingInMenu();
+	void askNewEntry();
+	void manualEntry();
+	User getPerson();
 private:
 	User person;
 };
