@@ -5,6 +5,9 @@
 
 class User {
     public:
+        User();
+        User(std::string, std::vector<double>, int, int, std::vector<Action>);
+        ~User();
         void setName(std::string str);
         std::string getName();
         void setAccounts(double amount);

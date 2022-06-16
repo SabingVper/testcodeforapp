@@ -1,4 +1,23 @@
 #include "user.h"
+#include <iostream>
+
+User::User() {
+    name = "tmp";
+    accounts = std::vector<double>{};
+    transcationStart = 0;
+    lastLine = 0;
+    transcationList = std::vector<Action>{};
+}
+User::User(std::string str, std::vector<double> vec, int start, int last, std::vector<Action> action) {
+    name = str;
+    accounts = vec;
+    transcationStart = start;
+    lastLine = last;
+    transcationList = action;
+}
+User::~User() {
+    std::cout << "User " << name << " has finshed" << std::endl;
+}
 
 void User::add(int acc, double amount) {
     accounts.at(acc) = accounts.at(acc) + amount;
