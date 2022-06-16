@@ -3,6 +3,8 @@
 #include "actions.h"
 #include <fstream>
 #include <iostream>
+#include <vector>
+#include <string>
 
 void Action::store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com) {
     for (int i = 0; i < 3; i++) {
@@ -15,7 +17,7 @@ void Action::store(std::vector<int> dmy, double amo, char act, int to, int from,
     reason = com;
 };
 
-void Action::savetoFile(std::string& path) {
+void Action::savetoFile(std::string &path) {
 	std::ofstream f; f.open(path, std::ios_base::app); std::string str; std::vector<std::string> contents;
 	while (f.good()) {
 		std::stringstream stream;
@@ -46,15 +48,15 @@ void Action::print() {
 	std::cout << firstLine << std::endl << secondLine << std::endl << thirdLine
 		<< std::endl << forthLine << std::endl << lastLine << std::endl;
 }
-std::vector<int> Action::getDate() { return date; };
-double Action::getAmount() { return amount; };
-char Action::getAction() { return action; };
-int Action::getAccountTo() { return accountTo; };
-int Action::getAccountFrom() { return accountFrom; };
-std::string Action::getReason() { return reason; };
-void Action::setDate(int d) { date.push_back(d); };
-void Action::setAmount(double amo) { amount = amo; };
-void Action::setAction(char act) { action = act; };
-void Action::setAccountTo(int to) { accountTo = to; };
-void Action::setAccountFrom(int from) { accountFrom = from; };
-void Action::setReason(std::string str) { reason = str; };
+std::vector<int> Action::getDate() { return date; }
+double Action::getAmount() { return amount; }
+char Action::getAction() { return action; }
+int Action::getAccountTo() { return accountTo; }
+int Action::getAccountFrom() { return accountFrom; }
+std::string Action::getReason() { return reason; }
+void Action::setDate(int d) { date.push_back(d); }
+void Action::setAmount(double amo) { amount = amo; }
+void Action::setAction(char act) { action = act; }
+void Action::setAccountTo(int to) { accountTo = to; }
+void Action::setAccountFrom(int from) { accountFrom = from; }
+void Action::setReason(std::string str) { reason = str; }
