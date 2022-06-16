@@ -7,8 +7,21 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <limits>
+#include <ctime>
 
 using namespace std;
+
+App::App() {
+    storePerson();
+}
+App::App(User &per) {
+    User person = per;
+}
+App::~App() {
+    cout << "App for " << person.getName() << " Terminated";
+}
+
 
 void App::storePerson(){
     //string path = "C:\\Users\\Ry-Bread\\Documents\\data.txt";
@@ -80,4 +93,76 @@ void App::printAllTranscations() {
         cout << "-----------------------" << endl;
         person.getTranscationList().at(i).print();
     }
+}
+void App::waitingInMenu() {
+
+}
+void App::askNewEntry() {
+    Action a;
+    time_t now = time(NULL); struct tm nowLocal; localtime_s(&nowLocal, &now);
+    a.setDate(nowLocal.tm_mday); a.setDate(nowLocal.tm_mon); a.setDate(nowLocal.tm_year + 1900);
+    double amount;
+    cout << "Amount: ";
+    while (1) {
+        if (cin >> amount) {
+            break;
+        }
+        else {
+            cout << "Invalid Input! Please input a numerical value." << endl;
+            cin.clear();
+            while (cin.get() != '\n'); // empty loop
+        }
+    }
+    cout << endl;
+    int accTo;
+    cout << "Account To: ";
+    while (1) {
+        if (cin >> accTo) {
+            if (accTo >= -1 && accTo < person.getAccounts().size()) {
+                break;
+            }
+            else {
+                cout << "Invalid Input! Please input a numerical value." << endl;
+                cin.clear();
+                while (cin.get() != '\n'); // empty loop
+            }
+        }
+        else {
+            cout << "Invalid Input! Please input a numerical value." << endl;
+            cin.clear();
+            while (cin.get() != '\n'); // empty loop
+        }
+    }
+    cout << endl;
+    int accFrom;
+    cout << "Account From: ";
+    while (1) {
+        if (cin >> accFrom) {
+            if (accFrom >= -1 && accFrom < person.getAccounts().size()) {
+                break;
+            }
+            else {
+                cout << "Invalid Input! Please input a numerical value." << endl;
+                cin.clear();
+                while (cin.get() != '\n'); // empty loop
+            }
+        }
+        else {
+            cout << "Invalid Input! Please input a numerical value." << endl;
+            cin.clear();
+            while (cin.get() != '\n'); // empty loop
+        }
+    }
+    cout << endl;
+    string reason;
+    cout << "Reason: ";
+
+
+
+}
+void App::manualEntry() {
+    
+}
+User App::getPerson() {
+    return person;
 }
