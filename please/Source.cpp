@@ -16,7 +16,6 @@ int main() {
 
     //cout << "Happy " << nowLocal.tm_year + 1900 << endl;
     
-    main.storePerson();
     main.printDefault();
 
     return 0;
