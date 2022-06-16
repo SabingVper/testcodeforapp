@@ -6,7 +6,7 @@
 class Action {
     public: 
         void store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com);
-        void savetoFile(std::string& path);
+        void savetoFile(std::string &path);
         void print();
         std::vector<int> getDate();
         double getAmount();
