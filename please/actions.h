@@ -8,7 +8,6 @@ class Action {
         Action();
         Action(std::vector<int>, double, char, int, int, std::string);
         ~Action();
-        //void store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com);
         void savetoFile(std::string &path);
         void print();
         std::vector<int> getDate();

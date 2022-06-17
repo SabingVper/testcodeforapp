@@ -23,18 +23,7 @@ Action::Action(std::vector<int> dmy, double amo, char act, int to, int from, std
 Action::~Action() {
 	std::cout << "Action " << std::endl;
 }
-/*
-void Action::store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com) {
-    for (int i = 0; i < 4; i++) {
-        date.push_back(dmy.at(i));
-    }
-    amount = amo;
-    action = act;
-    accountTo = to;
-    accountFrom = from;
-    reason = com;
-};
-*/
+
 void Action::savetoFile(std::string &path) {
 	std::ofstream f; f.open(path, std::ios_base::app); std::string str; std::vector<std::string> contents;
 	while (f.good()) {
@@ -74,7 +63,6 @@ int Action::getAccountFrom() { return accountFrom; }
 std::string Action::getReason() { return reason; }
 void Action::setDate(int d) { 
 	if (date.size() < 5) { date.push_back(d); } 
-	else { std::cout << "Not allowed to push anymore" << std::endl; }
 }
 void Action::setAmount(double amo) { amount = amo; }
 void Action::setAction(char act) { action = act; }
