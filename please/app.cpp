@@ -1,5 +1,6 @@
 #include "app.h"
 #include "actions.h"
+#include "date.h"
 #include <cmath>
 #include <fstream>
 #include <string>
@@ -9,6 +10,7 @@
 #include <sstream>
 #include <limits>
 #include <ctime>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -43,6 +45,7 @@ void App::storePerson(){
     person.setTranscationStart(2 + i);
 }
 void App::printDefault() {
+    clearScreen();
     int num = person.getAccounts().size();
     string str = "Name: " + person.getName() + "\nNumber of accounts: "
         + to_string(num);
@@ -89,6 +92,7 @@ void App::storeTranscation() {
     f.close();
 }
 void App::printAllTranscations() {
+    clearScreen();
     for (int i = 0; i < person.getTranscationList().size(); i++) {
         cout << "-----------------------" << endl;
         person.getTranscationList().at(i).print();
@@ -97,71 +101,92 @@ void App::printAllTranscations() {
 void App::waitingInMenu() {
 
 }
+string askString(string str = "null") {
+    string txt;
+    if (str != "null") {
+        cout << str;
+    }
+    cin >> txt;
+    cout << endl;
+    return txt;
+}
+double askingDouble(string str = "null") {
+    double num;
+    if (str != "null") {
+        cout << str;
+    }
+    while (1) {
+        if (cin >> num) {
+            return num;
+        }
+        else {
+            cout << "Invalid Input! Please input a numerical value." << endl;
+            cin.clear();
+            while (cin.get() != '\n'); // empty loop
+        }
+    }
+    cout << endl;
+}
+int askingInt(int min, int max, string str = "null") {
+    int num;
+    if(str != "null") {
+        cout << str;
+    }
+    while (1) {
+        if (cin >> num) {
+            if (num >= min && num < max) {
+                return num;
+            }
+            else {
+                cout << "Invalid Input! Please input a numerical value." << endl;
+                cin.clear();
+                while (cin.get() != '\n'); // empty loop
+            }
+        }
+        else {
+            cout << "Invalid Input! Please input a numerical value." << endl;
+            cin.clear();
+            while (cin.get() != '\n'); // empty loop
+        }
+    }
+    cout << endl;
+}
 void App::askNewEntry() {
     Action a;
     time_t now = time(NULL); struct tm nowLocal; localtime_s(&nowLocal, &now);
-    a.setDate(nowLocal.tm_mday); a.setDate(nowLocal.tm_mon); a.setDate(nowLocal.tm_year + 1900);
-    double amount;
-    cout << "Amount: ";
+    a.setDate(getDate()); a.setDate(getMonth()); a.setDate(getYear()); a.setDate(getYearDay());
     while (1) {
-        if (cin >> amount) {
+        clearScreen();
+        a.setAmount(askingDouble());        a.setAccountTo(askingInt(-1, person.getAccounts().size()));        
+        a.setAccountFrom(askingInt(-1, person.getAccounts().size()));        
+        a.setReason(askString("Reason: "));
+        a.print();
+        cout << "Is This Right? 1 == Yes, 0 == No" << endl;
+        if (askingInt(0, 2) == 0) {
             break;
         }
-        else {
-            cout << "Invalid Input! Please input a numerical value." << endl;
-            cin.clear();
-            while (cin.get() != '\n'); // empty loop
-        }
     }
-    cout << endl;
-    int accTo;
-    cout << "Account To: ";
-    while (1) {
-        if (cin >> accTo) {
-            if (accTo >= -1 && accTo < person.getAccounts().size()) {
-                break;
-            }
-            else {
-                cout << "Invalid Input! Please input a numerical value." << endl;
-                cin.clear();
-                while (cin.get() != '\n'); // empty loop
-            }
-        }
-        else {
-            cout << "Invalid Input! Please input a numerical value." << endl;
-            cin.clear();
-            while (cin.get() != '\n'); // empty loop
-        }
-    }
-    cout << endl;
-    int accFrom;
-    cout << "Account From: ";
-    while (1) {
-        if (cin >> accFrom) {
-            if (accFrom >= -1 && accFrom < person.getAccounts().size()) {
-                break;
-            }
-            else {
-                cout << "Invalid Input! Please input a numerical value." << endl;
-                cin.clear();
-                while (cin.get() != '\n'); // empty loop
-            }
-        }
-        else {
-            cout << "Invalid Input! Please input a numerical value." << endl;
-            cin.clear();
-            while (cin.get() != '\n'); // empty loop
-        }
-    }
-    cout << endl;
-    string reason;
-    cout << "Reason: ";
-
-
+    
 
 }
 void App::manualEntry() {
-    
+    Action a;
+    while (1) {
+        clearScreen();
+        a.setDate(askingInt(0, 31, "Day: "));
+        a.setDate(askingInt(0, 12, "Month: "));
+        a.setDate(askingInt(2000, getYear(), "Year: "));
+        a.setDate(askingInt(0, 365, "Year Day: "));
+        a.setAmount(askingDouble("Amount: "));
+        a.setAccountTo(askingInt(-1, person.getAccounts().size(), "Account To: "));
+        a.setAccountFrom(askingInt(-1, person.getAccounts().size(), "Account From: "));
+        a.setReason(askString("Reason: "));
+        a.print();
+        cout << "Is This Right? 1 == Yes, 0 == No" << endl;
+        if (askingInt(0, 2) == 0) {
+            break;
+        }
+    }
 }
 User App::getPerson() {
     return person;

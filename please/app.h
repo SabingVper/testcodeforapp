@@ -1,6 +1,7 @@
 #pragma once
 #ifndef app_h_
 #include "user.h"
+#include "screenControl.h"
 
 class App {
 public:
