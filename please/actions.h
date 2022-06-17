@@ -5,7 +5,10 @@
 
 class Action {
     public: 
-        void store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com);
+        Action();
+        Action(std::vector<int>, double, char, int, int, std::string);
+        ~Action();
+        //void store(std::vector<int> dmy, double amo, char act, int to, int from, std::string com);
         void savetoFile(std::string &path);
         void print();
         std::vector<int> getDate();
@@ -21,7 +24,7 @@ class Action {
         void setAccountFrom(int from);
         void setReason(std::string str);
     private:
-        std::vector<int> date; // Stores Day/Month/Year
+        std::vector<int> date; // Stores Day/Month/Year/Year Day
         double amount; // Stores Amount
         char action; // Stores action "T" == Transfer, "A" == Add, "R" == Remove
         int accountTo; // Stores where the money is going to
