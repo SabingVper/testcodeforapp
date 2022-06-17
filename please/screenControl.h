@@ -3,8 +3,6 @@
 #include <iostream>
 #include <stdlib.h>
 
-void clearScreen() {
-	system("CLS");
-}
+void clearScreen();
 
 #endif // !SCREENCONTROL_H_
