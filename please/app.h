@@ -2,6 +2,7 @@
 #ifndef app_h_
 #include "user.h"
 #include "screenControl.h"
+#include <string>
 
 class App {
 public:
@@ -12,8 +13,12 @@ public:
 	void storeTranscation();
 	void printDefault();
 	void printAllTranscations();
-	void waitingInMenu();
+	void inMenuText();
+	void inMenuMethods(bool&);
+	void moneyMethod(std::string);
+	void moneyTranfer();
 	void askNewEntry();
+	void autoNewEntry(double, int, char, std::string, int);
 	void manualEntry();
 	User getPerson();
 private:
